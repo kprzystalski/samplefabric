@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.codete.fabric.examples.oltcar;
+package org.hyperledger.fabric.samples.fabcar;
 
 import java.util.Objects;
 
