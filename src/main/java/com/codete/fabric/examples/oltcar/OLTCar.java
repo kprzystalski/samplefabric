@@ -55,9 +55,15 @@ public final class OLTCar implements ContractInterface {
         ChaincodeStub stub = ctx.getStub();
 
         Car car = new Car(mileage, repairName);
-        String carState = genson.serialize(car);
-        stub.putStringState(vin, carState);
 
+        Car[] carHistory = this.queryCarsHistory(ctx, vin);
+        if (carHistory != null && carHistory.length > 0) {
+            Car previousRepair = carHistory[carHistory.length - 1];
+            if (Integer.parseInt(previousRepair.getMileage()) <= mileage) {
+              String carState = genson.serialize(car);
+              stub.putStringState(vin, carState);
+            }
+        }
         return car;
     }
 
