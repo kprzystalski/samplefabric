@@ -62,7 +62,12 @@ public final class OLTCar implements ContractInterface {
             if (Integer.parseInt(previousRepair.getMileage()) <= mileage) {
               String carState = genson.serialize(car);
               stub.putStringState(vin, carState);
+            } else {
+              return car;
             }
+        } else {
+            String carState = genson.serialize(car);
+            stub.putStringState(vin, carState);
         }
         return car;
     }
